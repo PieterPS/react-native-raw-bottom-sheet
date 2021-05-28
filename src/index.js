@@ -59,6 +59,33 @@ class RBSheet extends Component {
     }
   }
 
+  switch(props) {
+    const { height, minClosingHeight, openDuration, closeDuration } = props;
+    const { animatedHeight, pan } = this.state;
+    
+    Animated.timing(animatedHeight, {
+      useNativeDriver: false,
+      toValue: minClosingHeight,
+      duration: closeDuration
+    }).start(() => {
+      pan.setValue({ x: 0, y: 0 });
+      // this.setState({
+      //   animatedHeight: new Animated.Value(0)
+      // });
+
+      console.log('Bottom-sheet closed - sort of.')
+      
+      Animated.timing(animatedHeight, {
+      useNativeDriver: false,
+      toValue: height,
+      duration: openDuration
+    }).start(
+      
+      console.log('Bottom-sheet open again.')
+    );
+    });
+  }
+
   createPanResponder(props) {
     const { closeOnDragDown, height } = props;
     const { pan } = this.state;
