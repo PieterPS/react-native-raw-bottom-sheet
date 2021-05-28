@@ -53,7 +53,7 @@ class RBSheet extends Component {
           modalVisible: visible,
           animatedHeight: new Animated.Value(0)
         });
-
+        console.log('done with the bottom-sheet animation')
         if (typeof onClose === "function") onClose(props);
       });
     }
@@ -164,8 +164,8 @@ RBSheet.defaultProps = {
   animationType: "none",
   height: 260,
   minClosingHeight: 0,
-  openDuration: 300,
-  closeDuration: 200,
+  openDuration: 3000,
+  closeDuration: 3000,
   closeOnDragDown: false,
   dragFromTopOnly: false,
   closeOnPressMask: true,
