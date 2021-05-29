@@ -59,8 +59,8 @@ class RBSheet extends Component {
     }
   }
 
-  switch(props) {
-    const { height, minClosingHeight, openDuration, closeDuration } = props;
+  switchSheet(height = this.props.height) {
+    const { minClosingHeight, openDuration, closeDuration } = this.props;
     const { animatedHeight, pan } = this.state;
     
     Animated.timing(animatedHeight, {
@@ -69,20 +69,11 @@ class RBSheet extends Component {
       duration: closeDuration
     }).start(() => {
       pan.setValue({ x: 0, y: 0 });
-      // this.setState({
-      //   animatedHeight: new Animated.Value(0)
-      // });
-
-      console.log('Bottom-sheet closed - sort of.')
-      
       Animated.timing(animatedHeight, {
       useNativeDriver: false,
       toValue: height,
       duration: openDuration
-    }).start(
-      
-      console.log('Bottom-sheet open again.')
-    );
+    }).start();
     });
   }
 
@@ -112,6 +103,10 @@ class RBSheet extends Component {
 
   close(props) {
     this.setModalVisible(false, props);
+  }
+
+  switch(height) {
+    this.switchSheet(height);
   }
 
   render() {
@@ -191,8 +186,8 @@ RBSheet.defaultProps = {
   animationType: "none",
   height: 260,
   minClosingHeight: 0,
-  openDuration: 3000,
-  closeDuration: 3000,
+  openDuration: 300,
+  closeDuration: 300,
   closeOnDragDown: false,
   dragFromTopOnly: false,
   closeOnPressMask: true,
